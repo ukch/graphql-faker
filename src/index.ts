@@ -112,12 +112,14 @@ async function runServer(
 
   const server = new ApolloServer({
     schema,
-    resolvers: fakeTypeResolver,
+    resolvers: fakeTypeResolver as any,
     fieldResolver: fakeFieldResolver,
     gateway: {
       async load() {
         return customExecuteFn;
-      }
+      },
+      onSchemaLoadOrUpdate: undefined,
+      stop: undefined,
     },
     allowBatchedHttpRequests: true,
   });

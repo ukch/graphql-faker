@@ -46,7 +46,7 @@ export const fakeTypeResolver: GraphQLTypeResolver<unknown, unknown> = async (
   info,
   abstractType,
 ) => {
-  const defaultResolved = await defaultTypeResolver(
+  const defaultResolved: any = await defaultTypeResolver(
     value,
     context,
     info,
@@ -69,7 +69,7 @@ export const fakeFieldResolver: GraphQLFieldResolver<unknown, unknown> = async (
   const { schema, parentType, fieldName } = info;
   const fieldDef = parentType.getFields()[fieldName];
 
-  let resolved = await defaultFieldResolver(source, args, context, info);
+  let resolved: Object = await defaultFieldResolver(source, args, context, info);
   if (resolved === undefined && source && typeof source === 'object') {
     resolved = source[info.path.key]; // alias value
   }
